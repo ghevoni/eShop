@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortare frigidere</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" charset="utf-8"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <!--     Bootstrap Font Icon CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <script language="JavaScript">
+        function CreateEmailAddress(){
+               var x = 'office%'
+               var y = 'pegas*r_o'
+               var z = 'mai'
+               var w = 'to'
+               x = x.replace('%', '@')
+               y = y.replace('*', '.')
+               y = y.replace('_', '')
+               var c = z + w + ':' + x + y
+               window.location = c
+        }
+    </script>
+
+    <style>
+       .header{
+            position: relative;
+            width: 100%;
+            height: 180px;
+            border: none;
+            margin: 0;
+       }
+
+       .left-panel {
+            height: auto;
+            width: 270px;
+            position: static;
+            border: solid black 1px;
+            background-color: white;
+            overflow-x: hidden;
+            padding-top: 20px;
+            margin-left: -30px;
+        }
+
+       .both{margin-left: 50px;}
+
+       .card{
+            margin-right: 40px;
+            margin-bottom: 10px;
+            margin-top: 40px;
+            border-radius: 10px;
+       }
+
+       .card-img-top{margin-top: 10px; margin-left: 30px;}
+
+
+       #row1{
+            margin-top: 20px;
+            margin-left: 100px;
+       }
+
+       .btnX{
+            position: absolute;
+            bottom: 0;
+       }
+
+       .btnY{
+            border: 1px solid green;
+            background-color: #3b9898;
+       }
+
+      .vertical{
+            text-align: center;
+      }
+
+      .vert{
+            position: relative;
+            text-align: center;
+            background-color: #3b9898;
+            border: 1px solid green;
+            width: 100px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+      }
+
+      .center{
+            margin-left: auto;
+            margin-right: auto;
+      }
+
+       #wlc{
+            font-family: "Brush Script MT", serif;
+            color: DodgerBlue;
+            font-size: 35px;
+            list-style-type: none;
+       }
+
+       .frame{
+            display: inline-block;
+            vertical-align: top;
+       }
+
+
+//meniurile derulante
+.parent1, .parent2, .parent3, .parent4, .parent5, .parent6 {
+	display: block;
+	position: relative;
+	float: left;
+	line-height: 30px;
+	border-right: #CCC 1px solid;
+	hover {background-color: #048ed8;}
+}
+
+.parent1 a, .parent2 a, .parent3 a, .parent4 a, .parent5 a, .parent6 a {
+	margin: 10px;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.parent1:hover>ul, .parent2:hover>ul, .parent3:hover>ul, .parent4:hover>ul, .parent5:hover>ul, .parent6:hover>ul {
+	display: block;
+	position: absolute;
+}
+
+.child1, .child2, .child3, .child4, .child5, .child6 {
+	display: none;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.child1 li, .child2 li, .child3 li, .child4 li, .child5 li, .child6 li {
+	background-color: #E4EFF7;
+	line-height: 30px;
+	border-bottom: #CCC 1px solid;
+	border-right: #CCC 1px solid;
+	width: 100%;
+}
+
+.child1 li a, .child2 li a, .child3 li a, .child4 li a, .child5 li a, .child6 li a {
+	color: #000000;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0px;
+	min-width: 10em;
+}
+
+ul ul ul {
+	left: 100%;
+	top: 0;
+	margin-left: 1px;
+}
+
+.parent1 li:hover, .parent2 li:hover, .parent3 li:hover, .parent4 li:hover, .parent5 li:hover, .parent6 li:hover {
+{background-color: #048ed8;}
+}
+
+#menu2{margin-top: 10px;}
+#menu3{margin-top: 10px;}
+#menu4{margin-top: 10px;}
+#menu5{margin-top: 10px;}
+#menu6{margin-top: 10px;}
+
+.btn1, .btn2, .btn3, .btn4, .btn5, .btn6 {position: relative; border-radius: 20px; width: 110px; left: 25%;}
+.menu1:hover .btn1, .menu2:hover .btn2, .menu3:hover .btn3, .menu4:hover .btn4, .menu5:hover .btn5, .menu6:hover .btn6 {background-color: #048ed8;}
+#odp1:hover, #odu1:hover, #sdr1:hover, #cdp1:hover{background-color: #048ed8;}
+#odp2:hover, #odu2:hover, #sdr2:hover, #cdp2:hover{background-color: #048ed8;}
+#odp3:hover, #odu3:hover, #sdr3:hover, #cdp3:hover{background-color: #048ed8;}
+#odp4:hover, #odu4:hover, #sdr4:hover, #cdp4:hover{background-color: #048ed8;}
+#odp5:hover, #odu5:hover, #sdr5:hover, #cdp5:hover{background-color: #048ed8;}
+#odp6:hover, #odu6:hover, #sdr6:hover, #cdp6:hover{background-color: #048ed8;}
+.child1, .child2, .child3, .child4, .child5, .child6 {z-index: 1;}
+
+.parent1:hover .child11{display-block;}
+.parent2:hover .child21{display-block;}
+.parent3:hover .child31{display-block;}
+.parent4:hover .child41{display-block;}
+.parent5:hover .child51{display-block;}
+.parent6:hover .child61{display-block;}
+
+.child11{display:none;position: absolute;top:40%;left:100%;}
+.child21{display:none;position: absolute;top:40%;left:100%;}
+.child31{display:none;position: absolute;top:40%;left:100%;}
+.child41{display:none;position: absolute;top:40%;left:100%;}
+.child51{display:none;position: absolute;top:40%;left:100%;}
+.child61{display:none;position: absolute;top:40%;left:100%;}
+
+.pagination{text-align: center;}
+
+#pag{margin-left: 300px;}
+
+
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <table class="center" style="border: none; width: 100%; height: auto;">
+        <tr>
+            <td valign="top" style="width: 150px; height: 180px;">
+                <a href="/imagines/pegasLogo.jpg">
+                    <img src="/imagines/pegasLogo.jpg" style="width: 150px height: 180px;" alt="">
+                </a>
+            </td>
+            <td style="width: 120px; height: 180px; vertical-align: bottom;">
+                <img style="margin-right: 5px;" src="/imagines/phone-call.jpg" alt="">
+                <span style="font-family: 'Brush Script MT', serif; font-size: 20px;">0745.697.038</span>
+                <p style="font-family: 'Brush Script MT', serif; font-size: 50px; margin-top: 60px;">Pegas</p>
+            </td>
+            <td valign="top" style="width: 1000px; height: 180px;">
+                <div class="frame">
+                    <span style="font-size: 20px; font-weight: bold; margin-left: 370px;">Sortare frigidere</span>
+                    <img style="margin-left: 420px; margin-right: 3px;" src="/imagines/email.jpg" alt="">
+                    <a href="javascript: CreateEmailAddress();">office@pegas.ro</a>
+                </div>
+
+                <ul class="nav justify-content-left" style="margin-left: 330px; margin-top: 10px;">
+                    <li class="nav-item" id="wlc" sec:authorize="hasAnyAuthority('ADMIN', 'USER')">
+                        Bine ai venit <span sec:authentication="name"/>!
+                    </li>
+                </ul>
+
+
+                <ul class="nav justify-content-left" style="margin-left: 100px; margin-top: 5px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/firstPage">Acasa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Despre noi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/product/add"
+                           sec:authorize="hasAuthority('ADMIN')">Adauga un produs</a>
+                    </li>
+                    <li class="nav-item">
+                        <div id="search bar" class="col-sm">
+                            <script type="text/javascript">
+                                function clearSearch() {
+                                    window.location = "[[@{/search}]]";
+                                }
+
+                            </script>
+                            <form th:action="@{/search}" method="get">
+                                <input type="text" name="keyword" id="keyword" size="20px" th:value="${keyword}"
+                                       required/>
+                                <input type="submit" value="Cauta"/>
+                                <input type="button" value="Sterge" id="btnClear" onclick="clearSearch()"/>
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown" style="padding-left: 100px" sec:authorize="!isAuthenticated()">
+                        <a id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/imagines/getIn.jpg" alt="Login" width="50px" height="35px" title="Login">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/register">Utilizator nou</a></li>
+                            <li><a class="dropdown-item" href="/login">Utilizator existent</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a id="nav" href="/logout">
+                            <img src="/imagines/getOut.jpg" alt="Logout" width="50px" height="35px" title="Logout">
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/get-cart">
+                            <img src="/imagines/shoppingCart.jpg" alt="ShoppingCart" width="50px" height="40px"
+                                 style="margin-right: 10px;" title="Shopping Cart">
+                        </a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <div class="btnX" style="width:100%">
+        <a href="/fridges">
+            <button class="btnY" style="width:19.7%">Toate frigiderele</button>
+        </a>
+        <a href="/bFridge1">
+            <button class="btnY" style="width:19.7%">Sortare frigidere dupa criterii</button>
+        </a>
+        <a href="/tvs">
+            <button class="btnY" style="width:19.8%">Televizoare</button>
+        </a>
+        <a href="/washingMachines">
+            <button class="btnY" style="width:19.7%">Masini de spalat</button>
+        </a>
+        <a href="/phones">
+            <button class="btnY" style="width:19.8%">Telefoane</button>
+        </a>
+    </div>
+</div>
+
+
+
+<div class="both">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="left-panel">
+                <p style="text-align: start; font-family: 'Brush Script MT', serif; font-size: xx-large; font-color: gray; margin-left: 30px;">
+                    <span style="margin-left: 30px;">Bine ati venit!</span><br>
+                    La noi gasiti mereu:<br>
+                    -preturi mici<br>
+                    -calitate garantata<br>
+                    -promotii<br>
+                    -24 de luni garantie<br>
+                    -transport gratuit<br>
+                    Dupa achizitionarea unui produs de la noi, aveti drept de retur<br><span style="margin-left: 40px">30 de zile</span><br>
+                    Va dorim alegeri<br><span style="margin-left: 40px;">inspirate!</span><br>
+                    <span style="margin-left: 10px;">Sortare(cantitate):</span><br>
+                </p>
+
+                <!--            code for Samsung fridges button-->
+                <ul id="menu1">
+                    <li class="parent1">
+                        <a href="/samsung/fridges">
+                            <button class="btn1" style="background-color: #048ed8">
+                                Samsung(<span th:text="${samsungFridgesTotalQuantity}"></span>)
+                            </button>
+                        </a>
+                        <!--                            Samsung(<span th:text="${samsungList}"></span>)</button></a>-->
+                        <ul class="child1">
+                            <li class="parent1" id="odp1"><span style="padding-left: 10px;">Ordonare dupa preturi</span>
+                                <ul class="child1">
+                                    <li><a href="/samsung/fridge/asc/prices">Preturi ascendente</a></li>
+                                    <li style="white-space:nowrap;"><a href="/samsung/fridge/desc/prices">Preturi
+                                        descendente</a></li>
+                                </ul>
+                            </li>
+                            <li class="parent1" id="odu1"><span
+                                    style="padding-left: 10px;">Ordonare dupa nr. de usi</span>
+                                <ul class="child1">
+                                    <li><a href="/samsung/fridge/doors1">Cu o usa</a></li>
+                                    <li><a href="/samsung/fridge/doors2">Cu doua usi</a></li>
+                                </ul>
+                            </li>
+                            <li class="parent1" id="sdr1"><span style="padding-left: 10px;">Sistemul de racire</span>
+                                <ul class="child1">
+                                    <li><a href="/samsung/fridge/noFrost">No Frost</a></li>
+                                    <li><a href="/samsung/fridge/dynamic">Dinamic</a></li>
+                                    <li><a href="/samsung/fridge/static">Static</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/samsung/fridge/water/dispenser">Dozator apa</a></li>
+                            <li class="parent1" id="cdp1"><span style="padding-left: 10px;">Categoria de preturi</span>
+                                <ul class="child11">
+                                    <li><a href="/samsung/fridge/prices12">1000 - 2000 lei</a></li>
+                                    <li><a href="/samsung/fridge/prices23">2000 - 3000 lei</a></li>
+                                    <li><a href="/samsung/fridge/prices34">3000 - 4000 lei</a></li>
+                                    <li><a href="/samsung/fridge/prices45">Peste 4000 lei</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/samsung/fridge/max/price">Cel mai scump</a></li>
+                            <li><a href="/samsung/fridge/min/price">Cel mai ieftin</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!--            code for Bosch fridges button-->
+                <ul id="menu2">
+                    <li class="parent2">
+                        <a href="/bosch/fridges">
+                            <button class="btn2" style="background-color: #048ed8">
+                                Bosch(<span th:text="${boschFridgesTotalQuantity}"></span>)
+                            </button>
+                        </a>
+                        <ul class="child2">
+                            <li class="parent2" id="odp2"><span style="padding-left: 10px;">Ordonare dupa preturi</span>
+                                <ul class="child2">
+                                    <li><a href="/bosch/fridge/asc/prices">Preturi ascendente</a></li>
+                                    <li style="white-space:nowrap;"><a href="/bosch/fridge/desc/prices">Preturi
+                                        descendente</a></li>
+                                </ul>
+                            </li>
+                            <li class="parent2" id="odu2"><span
+                                    style="padding-left: 10px;">Ordonare dupa nr. de usi</span>
+                                <ul class="child2">
+                                    <li><a href="/bosch/fridge/doors1">Cu o usa</a></li>
+                                    <li><a href="/bosch/fridge/doors2">Cu doua usi</a></li>
+                                </ul>
+                            </li>
+                            <li class="parent2" id="sdr2"><span style="padding-left: 10px;">Sistemul de racire</span>
+                                <ul class="child2">
+                                    <li><a href="/bosch/fridge/noFrost">No Frost</a></li>
+                                    <li><a href="/bosch/fridge/dynamic">Dinamic</a></li>
+                                    <li><a href="/bosch/fridge/static">Static</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/bosch/fridge/water/dispenser">Dozator apa</a></li>
+                            <li class="parent2" id="cdp2"><span style="padding-left: 10px;">Categoria de preturi</span>
+                                <ul class="child21">
+                                    <li><a href="/bosch/fridge/prices12">1000 - 2000 lei</a></li>
+                                    <li><a href="/bosch/fridge/prices23">2000 - 3000 lei</a></li>
+                                    <li><a href="/bosch/fridge/prices34">3000 - 4000 lei</a></li>
+                                    <li><a href="/bosch/fridge/prices45">Peste 4000 lei</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/bosch/fridge/max/price">Cel mai scump</a></li>
+                            <li><a href="/bosch/fridge/min/price">Cel mai ieftin</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!--            code for Arctic fridges button-->
+                <ul id="menu3">
+                    <li class="parent3">
+                        <a href="/arctic/fridges">
+                            <button class="btn3" style="background-color: #048ed8">
+                                Arctic(<span th:text="${arcticFridgesTotalQuantity}"></span>)
+                            </button>
+                        </a>
+                        <ul class="child3">
+                            <li class="parent3" id="odp3"><span style="padding-left: 10px;">Ordonare dupa preturi</span>
+                                <ul class="child3">
+                                    <li><a href="/arctic/fridge/asc/prices">Preturi ascendente</a></li>
+                                    <li style="white-space:nowrap;"><a href="/arctic/fridge/desc/prices">Preturi
+                                        descendente</a></li>
+                                </ul>
+                            </li>
+                            <li class="parent2" id="odu3"><span
+                                    style="padding-left: 10px;">Ordonare dupa nr. de usi</span>
+                                <ul class="child3">
+                                    <li><a href="/arctic/fridge/doors1">Cu o usa</a></li>
+                                    <li><a href="/arctic/fridge/doors2">Cu doua usi</a></li>
+                                </ul>
+                            </li>
+                            <li class="parent3" id="sdr3"><span style="padding-left: 10px;">Sistemul de racire</span>
+                                <ul class="child3">
+                                    <li><a href="/arctic/fridge/noFrost">No Frost</a></li>
+                                    <li><a href="/arctic/fridge/dynamic">Dinamic</a></li>
+                                    <li><a href="/arctic/fridge/static">Static</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/arctic/fridge/water/dispenser">Dozator apa</a></li>
+                            <li class="parent3" id="cdp3"><span style="padding-left: 10px;">Categoria de preturi</span>
+                                <ul class="child31">
+                                    <li><a href="/arctic/fridge/prices12">1000 - 2000 lei</a></li>
+                                    <li><a href="/arctic/fridge/prices23">2000 - 3000 lei</a></li>
+                                    <li><a href="/arctic/fridge/prices34">3000 - 4000 lei</a></li>
+                                    <li><a href="/arctic/fridge/prices45">Peste 4000 lei</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/arctic/fridge/max/price">Cel mai scump</a></li>
+                            <li><a href="/arctic/fridge/min/price">Cel mai ieftin</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!--            code for LG fridges button-->
+                <ul id="menu4">
+                    <li class="parent4">
+                        <a href="/lg/fridges">
+                            <button class="btn4" style="background-color: #048ed8">
+                                LG(<span th:text="${lgFridgesTotalQuantity}"></span>)
+                            </button>
+                        </a>
+                        <ul class="child4">
+                            <li class="parent4" id="odp4"><span style="padding-left: 10px;">Ordonare dupa preturi</span>
+                                <ul class="child4">
+                                    <li><a href="/lg/fridge/asc/prices">Preturi ascendente</a></li>
+                                    <li style="white-space:nowrap;"><a href="/lg/fridge/desc/prices">Preturi
+                                        descendente</a></li>
+                                </ul>
+                            </li>
+                            <li class="parent4" id="odu4"><span
+                                    style="padding-left: 10px;">Ordonare dupa nr. de usi</span>
+                                <ul class="child4">
+                                    <li><a href="/lg/fridge/doors1">Cu o usa</a></li>
+                                    <li><a href="/lg/fridge/doors2">Cu doua usi</a></li>
+                                </ul>
+                            </li>
+                            <li class="parent4" id="sdr4"><span style="padding-left: 10px;">Sistemul de racire</span>
+                                <ul class="child4">
+                                    <li><a href="/lg/fridge/noFrost">No Frost</a></li>
+                                    <li><a href="/lg/fridge/dynamic">Dinamic</a></li>
+                                    <li><a href="/lg/fridge/static">Static</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/lg/fridge/water/dispenser">Dozator apa</a></li>
+                            <li class="parent4" id="cdp4"><span style="padding-left: 10px;">Categoria de preturi</span>
+                                <ul class="child41">
+                                    <li><a href="/lg/fridge/prices12">1000 - 2000 lei</a></li>
+                                    <li><a href="/lg/fridge/prices23">2000 - 3000 lei</a></li>
+                                    <li><a href="/lg/fridge/prices34">3000 - 4000 lei</a></li>
+                                    <li><a href="/lg/fridge/prices45">Peste 4000 lei</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/lg/fridge/max/price">Cel mai scump</a></li>
+                            <li><a href="/lg/fridge/min/price">Cel mai ieftin</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!--            code for Indesit fridges button-->
+                <ul id="menu5">
+                    <li class="parent5">
+                        <a href="/indesit/fridges">
+                            <button class="btn5" style="background-color: #048ed8">
+                                Indesit(<span th:text="${indesitFridgesTotalQuantity}"></span>)
+                            </button>
+                        </a>
+                        <ul class="child5">
+                            <li class="parent5" id="odp5"><span style="padding-left: 10px;">Ordonare dupa preturi</span>
+                                <ul class="child5">
+                                    <li><a href="/indesit/fridge/asc/prices">Preturi ascendente</a></li>
+                                    <li style="white-space:nowrap;"><a href="/indesit/fridge/desc/prices">Preturi
+                                        descendente</a></li>
+                                </ul>
+                            </li>
+                            <li class="parent5" id="odu5"><span style="padding-left: 10px;">Ordonare dupa nr. de usi</span>
+                                <ul class="child5">
+                                    <li><a href="/indesit/fridge/doors1">Cu o usa</a></li>
+                                    <li><a href="/indesit/fridge/doors2">Cu doua usi</a></li>
+                                </ul>
+                            </li>
+                            <li class="parent5" id="sdr5"><span style="padding-left: 10px;">Sistemul de racire</span>
+                                <ul class="child5">
+                                    <li><a href="/indesit/fridge/noFrost">No Frost</a></li>
+                                    <li><a href="/indesit/fridge/dynamic">Dinamic</a></li>
+                                    <li><a href="/indesit/fridge/static">Static</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/indesit/fridge/water/dispenser">Dozator apa</a></li>
+                            <li class="parent5" id="cdp5"><span style="padding-left: 10px;">Categoria de preturi</span>
+                                <ul class="child51">
+                                    <li><a href="/indesit/fridge/prices12">1000 - 2000 lei</a></li>
+                                    <li><a href="/indesit/fridge/prices23">2000 - 3000 lei</a></li>
+                                    <li><a href="/indesit/fridge/prices34">3000 - 4000 lei</a></li>
+                                    <li><a href="/indesit/fridge/prices45">Peste 4000 lei</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/indesit/fridge/max/price">Cel mai scump</a></li>
+                            <li><a href="/indesit/fridge/min/price">Cel mai ieftin</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!--            code for Whirlpool fridges button-->
+                <ul id="menu6">
+                    <li class="parent6">
+                        <a href="/whirlpool/fridges">
+                            <button class="btn6" style="background-color: #048ed8">
+                                Whirlpool(<span th:text="${whirlpoolFridgesTotalQuantity}"></span>)
+                            </button>
+                        </a>
+                        <ul class="child6">
+                            <li class="parent6" id="odp6"><span style="padding-left: 10px;">Ordonare dupa preturi</span>
+                                <ul class="child6">
+                                    <li><a href="/whirlpool/fridge/asc/prices">Preturi ascendente</a></li>
+                                    <li style="white-space:nowrap;"><a href="/whirlpool/fridge/desc/prices">Preturi
+                                        descendente</a></li>
+                                </ul>
+                            </li>
+                            <li class="parent6" id="odu6"><span
+                                    style="padding-left: 10px;">Ordonare dupa nr. de usi</span>
+                                <ul class="child6">
+                                    <li><a href="/whirlpool/fridge/doors1">Cu o usa</a></li>
+                                    <li><a href="/whirlpool/fridge/doors2">Cu doua usi</a></li>
+                                </ul>
+                            </li>
+                            <li class="parent6" id="sdr6"><span style="padding-left: 10px;">Sistemul de racire</span>
+                                <ul class="child6">
+                                    <li><a href="/whirlpool/fridge/noFrost">No Frost</a></li>
+                                    <li><a href="/whirlpool/fridge/dynamic">Dinamic</a></li>
+                                    <li><a href="/whirlpool/fridge/static">Static</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/whirlpool/fridge/water/dispenser">Dozator apa</a></li>
+                            <li class="parent6" id="cdp6"><span style="padding-left: 10px;">Categoria de preturi</span>
+                                <ul class="child61">
+                                    <li><a href="/whirlpool/fridge/prices12">1000 - 2000 lei</a></li>
+                                    <li><a href="/whirlpool/fridge/prices23">2000 - 3000 lei</a></li>
+                                    <li><a href="/whirlpool/fridge/prices34">3000 - 4000 lei</a></li>
+                                    <li><a href="/whirlpool/fridge/prices45">Peste 4000 lei</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/whirlpool/fridge/max/price">Cel mai scump</a></li>
+                            <li><a href="/whirlpool/fridge/min/price">Cel mai ieftin</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <a href="/imagines/appliances.jpg" style="width: 450px; height: auto;" title="Mareste imaginea">
+                    <img src="/imagines/appliances.jpg" style="width: 250px; height: auto; margin-top: 20px;
+                    margin-left: 10px; border-radius: 10px;" alt="">
+                </a>
+
+                <a href="/imagines/superOffer.jpg" style="width: 450px; height: auto;" title="Mareste imaginea">
+                    <img src="/imagines/superOffer.jpg" style="width: 250px; height: 375px; margin-left: 10px;
+                    border-radius: 10px;" alt="">
+                </a>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-10">
+            <div class="row" id="row1">
+                <div class="card" th:each="product:${productList}" style="width:18rem;">
+                    <img th:src="${product.imageUrl}" class="card-img-top"
+                         style="width:220px;height:200px;" alt="ProductPicture">
+                    <div class="card-body" style="text-align:center;">
+                        <h5 class="card-title" th:text="${product.name} + ' ' +  ${product.brand}"></h5>
+                        <p class="card-text" th:text="${product.shortDescription}"></p>
+                        <p class="card-text" th:text=" 'Stoc: ' + ${product.quantity} + ' bucati' "></p>
+                        <p class="card-text" th:text=" 'Pret ' + ${product.price} + ' RON' "></p>
+                        <a th:href="@{'/product/view/' + ${product.productId}}" class="btn btn-primary">Detalii</a>
+                        <a th:href="@{'/add-cart/' + ${product.productId}}"
+                           class="btn btn-primary" id="buy" sec:authorize="hasAuthority('USER')">Cumpara</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

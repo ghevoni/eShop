@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina de editare</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Font Icon CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <script language="JavaScript">
+        function CreateEmailAddress(){
+               var x = 'office%'
+               var y = 'pegas*r_o'
+               var z = 'mai'
+               var w = 'to'
+               x = x.replace('%', '@')
+               y = y.replace('*', '.')
+               y = y.replace('_', '')
+               var c = z + w + ':' + x + y
+               window.location = c
+        }
+
+    </script>
+
+    <style>
+       .header{
+               position: relative;
+               width: 100%;
+               height:180px;
+               border: none;
+               margin: 0;
+       }
+
+
+       .wrapper{
+               display:grid;
+               grid-template-columns: repeat(5, auto);
+               grid-template-rows: repeat(2, auto);
+               background-color: grey;
+       }
+
+       .left-panel{
+              grid-column-start: 1;
+              grid-column-end: 2;
+              grid-row: 1 / span 2;
+              height: 100%;
+              width: 270px;
+              border: solid black 1px;
+              margin-top: auto;
+              margin-left: 20px;
+              background-color: white;
+              overflow-x: hidden;
+              padding-top: 20px;
+       }
+
+
+       .carousel{
+               grid-column-start: 2;
+               grid-column-end: 6;
+               grid-row-start: 1;
+               grid-row-end: 2;
+               margin-right: 200px;
+               margin-top: 20px;
+           }
+
+       .promotions{
+               grid-column-start: 2;
+               grid-column-end: 6;
+               grid-row-start: 2;
+               grid-row-end: 3;
+               margin-right: 50px;
+               margin-top: 420px;
+           }
+
+       #prg{
+               margin-left: 150px;
+               font-family: "Brush Script MT", serif;
+               color: DodgerBlue; font-size: xx-large;}
+
+
+       .btnX{
+               position: absolute;
+               bottom: 0;
+       }
+
+       .btnY{
+               border: 1px solid green;
+               background-color: #3b9898;
+       }
+
+       .vertical{
+               text-align: center;
+       }
+
+       .vert{
+               position: relative;
+               text-align: center;
+               background-color: #3b9898;
+               border: 1px solid green;
+               width: 100px;
+               margin-bottom: 10px;
+               border-radius: 20px;
+       }
+
+       .center{
+               margin-left: auto;
+               margin-right: auto;
+       }
+
+       #wlc{
+               font-family: "Brush Script MT", serif;
+               color: DodgerBlue;
+               font-size: 35px;
+               list-style-type: none;
+       }
+
+       #phone{
+              list-style-type: none;
+       }
+
+      .carousel-inner{
+              position: absolute;
+              top: 10px;
+              text-align:center;
+              font-family: "Brush Script MT", serif;
+              color: dodgerBlue;
+              left: 10%;
+      }
+
+
+      #txt1, #txt2, #txt3, #txt4, #txt5, #txt6, #txt7, #txt8, #txt9, #txt10, #txt11, #txt12,
+      #txt13, #txt14, #txt15, #txt16, #txt17, #txt18, #txt19, #txt20, #txt21, #txt22{
+             text-align:center;
+             font-family: "Brush Script MT", serif;
+             color: dodgerBlue;
+             font-size: xx-large;
+      }
+
+
+     .card-content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            margin-left: 80px;
+     }
+
+     .card{
+           position: relative;
+           background: #fff;
+           width: 280px;
+           height: auto;
+           box-shadow: 0 5px 25px rgb(1 1 1 / 20%);
+           border-radius: 10px;
+           overflow: hidden;
+           text-align: center;
+           margin-right: 40px;
+           margin-bottom: 30px;
+           margin-top: 20px;
+     }
+
+     .card-image{
+           width: 250px;
+           height: 280px;
+           margin-top: 10px;
+           margin-right: 20px;}
+
+     .card-image img{
+           width: 250px;
+           height: 100%;
+           margin-top: 10px;
+     }
+
+     .card-info{
+           position: relative;
+           color: #222;
+           padding: 10px 20px 20px;
+     }
+
+     .card-info h4{
+           font-size: 1.8em;
+           font-weight: 800px;
+           margin-bottom: 5px;
+     }
+
+     .card-info p{
+           font-size: 1em;
+           margin-bottom: 5px;
+     }
+
+     .container-custom {
+           margin-left: 250px;
+           margin-top: 50px;
+     }
+
+     #inputName, #inputBrand, #inputQuantity, #inputShortDescription, #inputExtraDescription, #inputPrice{
+          width: 300px;
+          height: 40px;
+          border-radius: 5px;
+          border: none;
+     }
+
+
+     .button-group{
+     display:inline-flex;
+     border-radius:50px;
+     margin-top: 5px;
+     margin-bottom: 20px;
+     height: 40px;
+     }
+
+     #btn2{margin-left: 5px;}
+     span a{height: 40px; width: 90px;}
+
+    </style>
+
+</head>
+<body>
+<div class="header">
+    <table class="center" style="border: none; width: 100%; height: auto;">
+        <tr>
+            <td valign="top" style="width: 150px; height: 180px;">
+                <a href="/imagines/pegasLogo.jpg">
+                    <img src="/imagines/pegasLogo.jpg" style="width: 150px height: 180px;" alt="">
+                </a>
+            </td>
+            <td style="width: 120px; height: 180px; vertical-align: bottom;">
+                <img style="margin-right: 5px;" src="/imagines/phone-call.jpg" alt="">
+                <span style="font-family: 'Brush Script MT', serif; font-size: 20px;">0745.697.038</span>
+                <p style="font-family: 'Brush Script MT', serif; font-size: 50px; margin-top: 60px;">Pegas</p>
+            </td>
+
+            <td valign="top" style="width: 1000px; height: 120px; margin-left: 50px;">
+                <div class="frame">
+                    <span style="font-size: 20px; font-weight: bold; margin-left: 390px;">Adaugare-editare</span>
+                    <img style="margin-left: 380px; margin-right: 3px;" src="/imagines/email.jpg" alt="">
+                    <a href="javascript: CreateEmailAddress();">office@pegas.ro</a>
+                </div>
+
+                <ul class="nav justify-content-left" style="margin-left: 350px; margin-top: 20px;">
+                    <li class="nav-item" id="wlc" sec:authorize="hasAnyAuthority('ADMIN', 'USER')">
+                        Bine ai venit <span sec:authentication="name"/>!
+                    </li>
+                </ul>
+
+                <ul class="nav justify-content-left" style="margin-left: 100px; margin-top: 10px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/firstPage">Acasa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Despre noi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/product/add"
+                           sec:authorize="hasAuthority('ADMIN')">Adauga un produs</a>
+                    </li>
+                    <li class="nav-item">
+                        <div id="search bar" class="col-sm">
+                            <script type="text/javascript">
+                                function clearSearch() {
+                                    window.location = "[[@{/search}]]";
+                                }
+
+
+                            </script>
+                            <form th:action="@{/search}" method="get">
+                                <input type="text" name="keyword" id="keyword" size="20px" th:value="${keyword}"
+                                       required/>
+                                <input type="submit" value="Cauta"/>
+                                <input type="button" value="Sterge" id="btnClear" onclick="clearSearch()"/>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown" style="padding-left: 100px" sec:authorize="!isAuthenticated()">
+                        <a id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/imagines/getIn.jpg" alt="Login" width="50px" height="35px" title="Login">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/register">Utilizator nou</a></li>
+                            <li><a class="dropdown-item" href="/login">Utilizator existent</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a id="nav" href="/logout">
+                            <img src="/imagines/getOut.jpg" alt="Logout" width="50px" height="35px" title="Logout">
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/get-cart">
+                            <img src="/imagines/shoppingCart.jpg" alt="ShoppingCart" width="50px" height="40px"
+                                 style="margin-right: 10px;" title="Shopping Cart">
+                        </a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <div class="btnX" style="width:100%">
+        <a href="/fridges">
+            <button class="btnY" style="width: 19.7%;">Toate frigiderele</button>
+        </a>
+        <a href="/bFridge1">
+            <button class="btnY" style="width: 19.7%;">Sortare frigidere dupa criterii</button>
+        </a>
+        <a href="/tvs">
+            <button class="btnY" style="width: 19.8%;">Televizoare</button>
+        </a>
+        <a href="/washingMachines">
+            <button class="btnY" style="width: 19.7%;">Masini de spalat</button>
+        </a>
+        <a href="/phones">
+            <button class="btnY" style="width: 19.8%;">Telefoane</button>
+        </a>
+    </div>
+</div>
+
+
+<div class="wrapper">
+    <div class="left-panel">
+
+        <p style="text-align: start; font-family: 'Brush Script MT', serif; font-size: xx-large; font-color: gray; margin-left: 30px;">
+            <span style="margin-left: 30px;">Bine ati venit!</span><br>
+            La noi gasiti mereu:<br>
+            -preturi mici<br>
+            -calitate garantata<br>
+            -promotii<br>
+            -24 de luni garantie<br>
+            -transport gratuit<br>
+            Dupa achizitionarea unui produs de la noi, aveti drept de retur<br><span style="margin-left: 40px">30 de zile</span><br>
+            Va dorim alegeri<br><span style="margin-left: 40px;">inspirate!</span><br>
+        </p>
+
+    </div>
+
+    <div class="container container-custom">
+        <div class="row">
+            <div class="col-md-3">
+                <form action="/product/save" method="post" enctype="multipart/form-data" th:object="${product}">
+                    <input type="hidden" name="productId" th:field="*{productId}">
+
+                    <div class="mb-3">
+                        <label for="inputName" class="form-label">Name</label><br>
+                        <input type="text" class="form-label" id="inputName" name="name"
+                               placeholder="Enter a name" th:field="*{name}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputBrand" class="form-label">Brand</label><br>
+                        <input type="text" class="form-label" id="inputBrand" name="brand"
+                               placeholder="Enter a brand" th:field="*{brand}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputQuantity" class="form-label">Quantity</label><br>
+                        <input type="text" class="form-label" id="inputQuantity" name="quantity"
+                               placeholder="Enter a quantity" th:field="*{quantity}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputShortDescription" class="form-label">Short Description</label><br>
+                        <input type="text" class="form-label" id="inputShortDescription" name="shortDescription"
+                               placeholder="Enter a short description" th:field="*{shortDescription}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputExtraDescription" class="form-label">Extra Description</label><br>
+                        <input type="text" class="form-label" id="inputExtraDescription" name="extraDescription"
+                               placeholder="Enter an extra description" th:field="*{extraDescription}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputPrice" class="form-label">Price</label><br>
+                        <input type="text" class="form-label" id="inputPrice" name="price"
+                               placeholder="Enter a price" th:field="*{price}">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="hidden" name="imageUrl" th:field="*{imageUrl}">
+                    </div>
+
+                    <input type="file" name="file"><br>
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary">Adaugare</button>
+                        <div id="btn2">
+                            <span th:if="${product.name=='Frigider'}"><a class="btn btn-primary" href="/fridges">Inapoi</a></span>
+                            <span th:if="${product.name=='Telefon'}"><a class="btn btn-primary" href="/phones">Inapoi</a></span>
+                            <span th:if="${product.name=='Televizor'}"><a class="btn btn-primary" href="/tvs">Inapoi</a></span>
+                            <span th:if="${product.name=='Masina de spalat'}"><a class="btn btn-primary" href="/washingMachines">Inapoi</a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

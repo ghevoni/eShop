@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalii produse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Font Icon CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <style>
+        .card-img-top{margin-top: 10px;}
+    </style>
+</head>
+
+<body>
+<h1 style="text-align:center">Detalii produse</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container">
+                <div class="row">
+                    <div class="card card-custom text-center" style="margin-top:100px;margin-left:330px;width:425px; margin-bottom:20px;">
+                        <img th:src="${product.imageUrl}" style="width:400px;height:350px" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${product.name} + ' ' + ${product.brand}"></h5>
+                            <p class="card-text" th:text="${product.extraDescription}"></p>
+                            <p class="card-text" th:text=" 'Pret: ' + ${product.price} + ' RON' "></p>
+
+                            <span th:if="${product.name=='Frigider'}"><a class="btn btn-primary" href="/fridges">Inapoi</a></span>
+                            <span th:if="${product.name=='Telefon'}"><a class="btn btn-primary" href="/phones">Inapoi</a></span>
+                            <span th:if="${product.name=='Televizor'}"><a class="btn btn-primary" href="/tvs">Inapoi</a></span>
+                            <span th:if="${product.name=='Masina de spalat'}"><a class="btn btn-primary" href="/washingMachines">Inapoi</a></span>
+
+                            <a th:href="@{'/product/edit/' + ${product.productId}}" sec:authorize="hasAuthority('ADMIN')"
+                            class="btn btn-primary">Editeaza</a>
+                            <a th:href="@{'/product/delete/' + ${product.productId}}" sec:authorize="hasAuthority('ADMIN')"
+                            class="btn btn-primary">Sterge</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
